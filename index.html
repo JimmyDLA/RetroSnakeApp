@@ -4,16 +4,44 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="index.css">
+        <link href="https://fonts.googleapis.com/css?family=Nova+Flat" rel="stylesheet">
         <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1">
         <title>Hello World</title>
         <script src="app.js" defer></script>
     </head>
 
     <body>
+            <!--GAME LANDING PAGE -->
         <div id="firstPageContainer">
-            <h1>Retro</h1>
-            <img src="./public/snake-logo.jpg" alt="snake-logo" height="300" width="300">
+            <h1 id="title">Retro</h1>
+            <img id="logo" src="./public/snake-logo.jpg" alt="snake-logo" height="85" width="170">
             <button id="button"><b> Play</b></button>
+        </div>
+
+            <!-- GAME INSTRUCTION PAGE -->
+        <div id="instructionCont">
+            <div id="headerCont">
+                <h1 id="direction"><u>INSTRUCTIONS:</u></h1>
+            </div>
+
+            <div id="directionCont">
+                <img id="arrowImg" src="./public/arrow-keys.png" height="60" width="90" alt="">
+                <div id="text">
+                    <h2>Use arrows to</h2>
+                    <h2>change directions</h2>
+                </div>
+            </div>
+
+            <div id="ruleCont">
+                <img src="./public/game-rules-img.png" height="60" width="200" alt="">
+            </div>
+
+            <div id="buttonCont">
+                <button class="button" onclick="easy()" id="easy">Easy</button>
+                <button class="button" onclick="medium()" id="medium">Medium</button>
+                <button class="button" onclick="hard()" id="hard">Hard</button>
+                <button class="button" onclick="pro()" id="pro">Pro</button>
+            </div>
         </div>
     </body>
 

@@ -1,39 +1,95 @@
 body {
-    background-color: #6ab04c;
     font-family: 'Nova Flat', cursive;
     display: block;
-    height: 600px;
-    width: 98%;
+    /* background-color: rgb(45,73,24); /* For browsers that do not support gradients */ */
     background-color: white; /* For browsers that do not support gradients */
     /* background-image: linear-gradient(rgb(45,73,24) 30% , #58704d , white , white ); Standard syntax (must be last) */
 }
-h1 {
-    color: rgb(45,73,24);
-}
-p {
-    color: rgb(238, 228, 228);
-}
-#button {
-    height: 50;
-    width: 100;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: rgb(45,73,24);
-    background-color: rgb(238, 228, 228);
-    border: none;
-    font-size: 25;
-    border-radius: 7px;
-}
 
-#button:hover {
-    color: rgb(238, 238, 238);
-    background-color:rgb(45,73,24);
-}
-
+/* GAME LANDING PAGE */
 #firstPageContainer{
-    display: flex;
-    justify-content: center;
+    display: none;
+    height: 200px;
+    justify-content: space-around;
     flex-direction: column;
     align-items: center;
+}
+#title {
+    color: white;
+    margin: 0;
+}
+#button {
+    height: 25px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(45,73,24);
+    background-color: rgb(240, 240, 240);
+    border: none;
+    border-radius: 5px;
+}
+
+/* GAME INSTRUCTION PAGE */
+#instructionCont{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Nova Flat', cursive;
+    height: 200px;
+}
+#directionCont{
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+}
+h2{
+    margin: 0;
+    font-size: 11px;
+}
+#text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column
+}
+#buttonCont{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    width: 90%;
+
+}
+#direction{
+    color: red;
+    font-size: 15px;
+}
+.button{
+    height: 60px;
+    width: 150px;
+    color: white;
+    border:none;
+    font-size: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 7px 21px 0px rgba(0,0,0,0.75);
+}
+
+#easy{
+    background-color: #4A90E2;
+}
+
+#medium{
+    background-color: #0EBD71;
+
+}
+
+#hard{
+    background-color: #E4D732;
+
+}
+
+#pro{
+    background-color: #D0021B;
+
 }
