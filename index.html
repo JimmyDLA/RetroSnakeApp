@@ -42,6 +42,23 @@
                 <button class="button" onclick="hard()" id="hard">Hard</button>
                 <button class="button" onclick="pro()" id="pro">Pro</button>
             </div>
+
+            <div class="pressCont">
+                <div class="press" id="press1">1</div>
+                <div class="press" id="press2">2</div>
+                <div class="press" id="press3">3</div>
+                <div class="press" id="press4">4</div>
+            </div>
+        </div>
+
+            <!-- GAME PAGE -->
+        <div class="gameContainer">
+            <h1 id="score">SCORE: 0</h1>
+            <canvas id="canvas" width="208" height="208" style="border:5px solid #000000; display: block;"></canvas>
+            <div id="gameoverCont">
+                <button onclick="restart()" id="againButton">Play again</button>
+                <img src="./public/gameover.png" alt="gameover" id="gameover" height="180" width="180">
+            </div>
         </div>
     </body>
 

@@ -1,8 +1,8 @@
 body {
     font-family: 'Nova Flat', cursive;
     display: block;
-    /* background-color: rgb(45,73,24); /* For browsers that do not support gradients */ */
-    background-color: white; /* For browsers that do not support gradients */
+    background-color: rgb(45,73,24); /* For browsers that do not support gradients
+    background-color: rgba(48, 51, 107,0.8); /* For browsers that do not support gradients */
     /* background-image: linear-gradient(rgb(45,73,24) 30% , #58704d , white , white ); Standard syntax (must be last) */
 }
 
@@ -32,7 +32,7 @@ body {
 
 /* GAME INSTRUCTION PAGE */
 #instructionCont{
-    display: flex;
+    display: none;
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
@@ -66,11 +66,10 @@ h2{
     font-size: 15px;
 }
 .button{
-    height: 60px;
     color: white;
     border:none;
     border-radius: 10px;
-    box-shadow: 0px 7px 21px 0px rgba(0,0,0,0.75);
+    /* box-shadow: 0px 7px 21px 0px rgba(0,0,0,0.75); */
 }
 
 #easy{
@@ -90,4 +89,49 @@ h2{
 #pro{
     background-color: #D0021B;
 
+}
+
+.pressCont{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    width: 93%;
+}
+
+.press{
+    height: 20px;
+    width: 20px;
+    background-color: rgb(200, 200, 200);
+    border-radius: 3px;
+    text-align: center;
+}
+
+/* game CSS */
+.gameContainer{
+    display: none;
+    /* background-color: rgba(48, 51, 107,0.4); */
+    border-radius: 10px;
+    flex-direction: column;
+    align-items: center;
+    height: 250px;
+}
+#score{
+    color: white;
+    font-family: 'Nova Flat', cursive;
+    margin: 0;
+    font-size: 15px;
+}
+#gameoverCont{
+    display: none;
+    position: absolute;
+    top: 18%;
+    left: 10%;
+}
+#againButton{
+    position: absolute;
+    top: 40%;
+    left: 25%;
+    height: 25px;
+    width: 100px;
+    border-radius: 10px;
 }
