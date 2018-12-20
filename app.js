@@ -1,63 +1,57 @@
 window.addEventListener("load", function() {
     console.log("JS running")
-  medium()
+//   medium()
 });
 
 console.log("JS is running");
 
 //global variables
 const canvas = document.getElementById('canvas');
-const scoreText = document.getElementById('score');
 const ctx = canvas.getContext("2d");
-
-//add new image
-let ground = new Image();
-let egg = new Image();
-ground.src = "./public/checker board.png";
-egg.src = "./public/egg.png";
-
-//add new audio
-// let audio = new Audio();
-// audio.src =  "./path"
-
-let box = 13;
-let score = 0;
-let snake = [];
-let dir;
+let page = 1;
 let level;
-let food = {
-    x: Math.floor(Math.random() * 16) * box,
-    y: Math.floor(Math.random() * 16) * box
-}
+let dir;
 
-//where snake start
-snake[0] = { x: 8 * box, y: 9 * box };
 
 document.activeElement.addEventListener('keydown', direction);
-document.addEventListener("keydown", direction);
 
 function direction(e) {
     console.log("direction = "+e.key);
-    if ((e.keyCode == 37 || e.key == "ArrowLeft")  && dir != "RIGHT") {
+    if ((page == 3 && e.key == "ArrowLeft")  && dir != "RIGHT") {
         dir = "LEFT";
 
-    } else if ((e.keyCode == 38 || e.key == "ArrowUp") && dir != "DOWN") {
+    } else if ((page == 3 && e.key == "ArrowUp") && dir != "DOWN") {
         dir = "UP";
         
-    } else if ((e.keyCode == 39 || e.key == "ArrowRight") && dir != "LEFT") {
+    } else if ((page == 3 && e.key == "ArrowRight") && dir != "LEFT") {
         dir = "RIGHT";
 
-    } else if ((e.keyCode == 40 || e.key == "ArrowDown") && dir != "UP") {
+    } else if ((page == 3 && e.key == "ArrowDown") && dir != "UP") {
         dir = "DOWN";
 
-    } else if ((e.keyCode == 40 || e.key == "ArrowDown") && dir != "UP") {
-        dir = "DOWN";
+    } else if ( e.key == "Enter" && page == 1) {
+        //next page to instruction
+        showInstruction();
 
-    } else if ((e.keyCode == 40 || e.key == "ArrowDown") && dir != "UP") {
-        dir = "DOWN";
+    } else if ( e.key == "Enter" && page == 4) {
+        //restart game 
+        restart();
+    } else if (e.key == "1" && page == 2) {
+        // select level ...
+        console.log("game set to easy")
+        easy();
 
-    }else if ((e.keyCode == 40 || e.key == "ArrowDown") && dir != "UP") {
-        dir = "DOWN";
+    } else if (e.key == "2" && page == 2) {
+        // select level ...
+        medium();
+
+    } else if (e.key == "3" && page == 2) {
+        // select level ...
+        hard();
+
+    } else if (e.key == "4" && page == 2) {
+        // select level ...
+        pro();
 
     }
     
@@ -65,7 +59,28 @@ function direction(e) {
 
 
 function game() {
-    console.log(document.activeElement);
+    console.log("RUN GAME!");
+    //add new image
+    let ground = new Image();
+    let egg = new Image();
+    ground.src = "./public/checker board.png";
+    egg.src = "./public/egg.png";
+
+    //add new audio
+    // let audio = new Audio();
+    // audio.src =  "./path"
+
+    const scoreText = document.getElementById('score');
+    let box = 13;
+    let score = 0;
+    let snake = [];
+    let food = {
+        x: Math.floor(Math.random() * 16) * box,
+        y: Math.floor(Math.random() * 16) * box
+    }
+
+    //where snake start
+    snake[0] = { x: 8 * box, y: 9 * box };
 
 
     function collision(head, arr) {
@@ -181,59 +196,95 @@ function game() {
         // collision detection
         if (snakeX < 0 || snakeX > box * 15 || snakeY < 0 || snakeY > box * 15 || collision(newHead, snake)) {
             console.log("GAME OVER!");
+            page = 4;
 
             clearInterval(startGame);
             setTimeout(() => {
                 gameover();
             }, 500);
+            return;
         }
 
         snake.unshift(newHead);
     }
 
-    console.log(level)
+    console.log("level = "+level)
     let startGame = setInterval(draw, level);
 
 }
 
-function restart() {
-    console.log("refresh");
-    location.reload();
+function restart(){
+    score = 0;
+    dir = "";
+
+    // //where snake start
+    // snake[0] = { x: 8 * box, y: 9 * box };
+
+    const scoreText = document.getElementById('score');
+    scoreText.innerHTML = "SCORE: " + score;
+    //remove gameover
+    let gameoverAlert = document.getElementById("gameoverCont");
+    gameoverAlert.style.display = "none";
+    //remove gameCont
+    let gameContainer = document.querySelector(".gameContainer");
+    gameContainer.style.display = "none";
+    showInstruction()
+}
+
+
+function showInstruction(){
+    let body = document.querySelector("body");
+    body.style.backgroundColor = "white"
+    //hide landing page
+    let firstPage = document.getElementById("firstPageContainer");
+    firstPage.style.display = "none";
+
+    // show instructionCont
+    let instructionCont = document.getElementById("instructionCont");
+    instructionCont.style.display = "flex";
+
+    //keep track of page
+    page = 2;
 
 }
 
 function showGame() {
     //hide instructionCont
-    let instructionCont = document.getElementById("instructionCont")
+    let instructionCont = document.getElementById("instructionCont");
     instructionCont.style.display = "none";
+
     //show gameContainer
     let gameContainer = document.querySelector(".gameContainer");
-    gameContainer.style.display = "flex"
+    gameContainer.style.display = "flex";
+
     //show canvas 
-    canvas.style.display = "block"
+    canvas.style.display = "block";
+
+    //change body background-color
+    let body = document.querySelector("body");
+    body.style.backgroundColor = "rgb(45, 73, 24)";
+    page = 3;
+
+    game();
 }
 
 function easy() {
     level = 450;
     console.log("clicked easy");
     showGame();
-    game();
 }
 function medium() {
-    level = 350;
+    level = 400;
     console.log("clicked medium");
     showGame();
-    game();
 }
 function hard() {
-    level = 250;
+    level = 350;
     console.log("clicked hard");
     showGame();
-    game();
 }
 function pro() {
-    level = 150;
+    level = 300;
     console.log("clicked pro");
     showGame();
-    game();
 }

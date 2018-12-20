@@ -8,7 +8,7 @@ body {
 
 /* GAME LANDING PAGE */
 #firstPageContainer{
-    display: none;
+    display: flex;
     height: 200px;
     justify-content: space-around;
     flex-direction: column;
@@ -43,6 +43,10 @@ body {
     display: flex;
     flex-direction: row;
     margin: 0;
+}
+#ruleCont{
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 h2{
     margin: 0;
@@ -96,6 +100,7 @@ h2{
     justify-content: space-around;
     flex-direction: row;
     width: 93%;
+    padding-top: 3px;
 }
 
 .press{
