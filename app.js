@@ -11,6 +11,11 @@ const ctx = canvas.getContext("2d");
 let page = 1;
 let level;
 let dir;
+let eat;
+let trun;
+let wall;
+let gameMusic;
+let overMusic;
 
 
 document.activeElement.addEventListener('keydown', direction);
@@ -19,22 +24,26 @@ function direction(e) {
     console.log("direction = "+e.key);
     if ((page == 3 && e.key == "ArrowLeft")  && dir != "RIGHT") {
         dir = "LEFT";
+        turn.play();
 
     } else if ((page == 3 && e.key == "ArrowUp") && dir != "DOWN") {
         dir = "UP";
-        
+        turn.play();
+
     } else if ((page == 3 && e.key == "ArrowRight") && dir != "LEFT") {
         dir = "RIGHT";
+        turn.play();
 
     } else if ((page == 3 && e.key == "ArrowDown") && dir != "UP") {
         dir = "DOWN";
+        turn.play();
 
     } else if ( e.key == "Enter" && page == 1) {
         //next page to instruction
         showInstruction();
 
     } else if ( e.key == "Enter" && page == 4) {
-        //restart game 
+        //restart game
         restart();
     } else if (e.key == "1" && page == 2) {
         // select level ...
@@ -54,7 +63,7 @@ function direction(e) {
         pro();
 
     }
-    
+
 }
 
 
@@ -67,8 +76,23 @@ function game() {
     egg.src = "./public/egg.png";
 
     //add new audio
-    // let audio = new Audio();
-    // audio.src =  "./path"
+    eat = new Audio();
+    eat.src =  "./public/audio/eat.mp3";
+
+    turn = new Audio();
+    turn.src =  "./public/audio/turn.mp3";
+    turn.volume = 0.5;
+
+    wall = new Audio();
+    wall.src =  "./public/audio/wall.mp3";
+
+    overMusic = new Audio();
+    overMusic.src =  "./public/audio/over.mp3";
+
+    gameMusic = new Audio();
+    gameMusic.src =  "./public/audio/game_music.mp3";
+    gameMusic.loop = true;
+    gameMusic.volume = 1;
 
     const scoreText = document.getElementById('score');
     let box = 13;
@@ -96,9 +120,11 @@ function game() {
     function gameover() {
         let gameoverAlert = document.getElementById("gameoverCont");
         gameoverAlert.style.display = "block";
+        overMusic.play();
     }
 
     function draw() {
+        gameMusic.play();
         console.log("draw");
 
         // ctx.drawImage(src, x, y, width, height);
@@ -156,7 +182,7 @@ function game() {
                 ctx.fillStyle = "rgba(48,52,105, 0.8)";
                 ctx.fill();
             } else {
-                // draw snake body                
+                // draw snake body
                 ctx.fillStyle = "rgba(249, 202, 36,1.0)";
                 ctx.strokeStyle = "white";
                 ctx.lineWidth = 3;
@@ -174,8 +200,9 @@ function game() {
         if (dir == "UP") snakeY -= box;
         if (dir == "DOWN") snakeY += box;
 
-        // if snake head has same X,Y as food, POINT++ 
+        // if snake head has same X,Y position as food, SCORE++
         if (snakeX == food.x && snakeY == food.y) {
+            eat.play();
             score++;
             scoreText.innerHTML = "SCORE: " + score;
 
@@ -195,6 +222,8 @@ function game() {
 
         // collision detection
         if (snakeX < 0 || snakeX > box * 15 || snakeY < 0 || snakeY > box * 15 || collision(newHead, snake)) {
+            wall.play();
+            gameMusic.pause();
             console.log("GAME OVER!");
             page = 4;
 
@@ -215,7 +244,7 @@ function game() {
 
 function restart(){
     score = 0;
-    dir = "";
+    dir = null;
 
     // //where snake start
     // snake[0] = { x: 8 * box, y: 9 * box };
@@ -257,7 +286,7 @@ function showGame() {
     let gameContainer = document.querySelector(".gameContainer");
     gameContainer.style.display = "flex";
 
-    //show canvas 
+    //show canvas
     canvas.style.display = "block";
 
     //change body background-color
