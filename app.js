@@ -78,10 +78,13 @@ function game() {
     //add new audio
     eat = new Audio();
     eat.src =  "./public/audio/eat.mp3";
+    eat.volume = 0.1;
+    console.log("eat audio:" , eat);
+    console.log("eat audio:" + JSON.stringify(eat));
 
     turn = new Audio();
     turn.src =  "./public/audio/turn.mp3";
-    turn.volume = 0.5;
+    turn.volume = 0.1;
 
     wall = new Audio();
     wall.src =  "./public/audio/wall.mp3";
